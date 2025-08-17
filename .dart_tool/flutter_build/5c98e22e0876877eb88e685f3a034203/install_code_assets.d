@@ -1,0 +1,1 @@
+ D:\\Andrea\\android_apps\\reviewapp\\.dart_tool\\flutter_build\\5c98e22e0876877eb88e685f3a034203\\native_assets.json: 

@@ -1,0 +1,9 @@
+# Configura l'analyzer per analizzare staticamente il codice Dart
+
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # Puoi personalizzare le regole qui sotto
+    # prefer_single_quotes: true
+    # avoid_print: false
