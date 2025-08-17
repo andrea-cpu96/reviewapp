@@ -1,32 +1,39 @@
 name: reviewapp
-description: A Review application built with Flutter framework.
+description: A new Flutter project.
 publish_to: 'none'
+
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: '>=3.0.0 <4.0.0' # Adatta alla tua versione di Flutter
 
-dependencies:  
-  flutter:  
-    sdk: flutter  
-  shared_preferences: ^2.2.2
-  flutter_rating_bar: ^4.0.1
-  http: ^0.13.6
+dependencies:
+  flutter:
+    sdk: flutter
 
-dev_dependencies:  
+  # DIPENDENZE CHIAVE:
+  shared_preferences: ^2.2.2    # Per salvare il nome utente
+  cupertino_icons: ^1.0.6       # Icone iOS style (comune)
+  flutter_rating_bar: ^4.0.1    # Per le stelle di valutazione
+  http: ^1.1.0                  # Per le chiamate HTTP al server
+
+  # Aggiungi qui altre dipendenze se usate attivamente dal tuo codice
+  # Es. se usi json_serializable per Recensione.dart:
+  # json_annotation: ^4.9.0
+
+dev_dependencies:
   flutter_test:
-    sdk: flutter  
-  flutter_lints: ^4.0.0  
-  flutter_launcher_icons: ^0.14.4
+    sdk: flutter
+  flutter_lints: ^2.0.3 # O la versione risolta da pub get / ultima compatibile
 
-flutter_launcher_icons:
-  android: true
-  ios: true
-  image_path: "assets/icon.png"
+  # Se usi json_serializable:
+  # build_runner: ^2.4.0
+  # json_serializable: ^6.7.0
 
 flutter:
   uses-material-design: true
-  assets:  
-    - assets/cinepresa.gif
-    - assets/icon.png
-    - assets/Giovanni.png
+
+  assets:
+    - assets/images/ # Per giovanni.png
+    - assets/cinepresa.gif # Per la splash screen GIF
+
