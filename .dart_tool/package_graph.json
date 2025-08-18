@@ -9,8 +9,10 @@
       "dependencies": [
         "cupertino_icons",
         "flutter",
+        "flutter_localizations",
         "flutter_rating_bar",
         "http",
+        "intl",
         "shared_preferences"
       ],
       "devDependencies": [
@@ -41,6 +43,15 @@
         "stream_channel",
         "test_api",
         "vector_math"
+      ]
+    },
+    {
+      "name": "intl",
+      "version": "0.20.2",
+      "dependencies": [
+        "clock",
+        "meta",
+        "path"
       ]
     },
     {
@@ -76,6 +87,15 @@
         "shared_preferences_platform_interface",
         "shared_preferences_web",
         "shared_preferences_windows"
+      ]
+    },
+    {
+      "name": "flutter_localizations",
+      "version": "0.0.0",
+      "dependencies": [
+        "flutter",
+        "intl",
+        "path"
       ]
     },
     {

@@ -10,12 +10,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   # DIPENDENZE CHIAVE:
   shared_preferences: ^2.2.2    # Per salvare il nome utente
   cupertino_icons: ^1.0.6       # Icone iOS style (comune)
   flutter_rating_bar: ^4.0.1    # Per le stelle di valutazione
   http: ^1.1.0                  # Per le chiamate HTTP al server
+  intl: ^0.20.1
 
   # Aggiungi qui altre dipendenze se usate attivamente dal tuo codice
   # Es. se usi json_serializable per Recensione.dart:

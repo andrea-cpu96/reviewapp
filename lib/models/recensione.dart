@@ -1,13 +1,14 @@
-import 'package:flutter/foundation.dart' show immutable; // Per @immutable
+import 'package:flutter/foundation.dart' show immutable;
 
-@immutable // Buona pratica per modelli di dati
+@immutable
 class Recensione {
   final String titolo;
   final String genere;
   final double voto;
   final String trama;
   final String recensione;
-  final String? reviewerName; // NUOVO CAMPO: nome del reviewer (opzionale)
+  final String? reviewerName;
+  final DateTime dataCreazione; // NUOVO CAMPO
 
   const Recensione({
     required this.titolo,
@@ -15,10 +16,10 @@ class Recensione {
     required this.voto,
     required this.trama,
     required this.recensione,
-    this.reviewerName, // Aggiunto al costruttore
+    this.reviewerName,
+    required this.dataCreazione, // AGGIUNTO AL COSTRUTTORE
   });
 
-  // Metodo toJson per la serializzazione (per SharedPreferences e server)
   Map<String, dynamic> toJson() {
     return {
       'titolo': titolo,
@@ -26,11 +27,11 @@ class Recensione {
       'voto': voto,
       'trama': trama,
       'recensione': recensione,
-      'reviewerName': reviewerName, // AGGIUNTO
+      'reviewerName': reviewerName,
+      'dataCreazione': dataCreazione.toIso8601String(), // Converti DateTime in Stringa ISO
     };
   }
 
-  // Metodo fromJson per la deserializzazione
   factory Recensione.fromJson(Map<String, dynamic> json) {
     return Recensione(
       titolo: json['titolo'] as String? ?? 'N/A',
@@ -38,11 +39,35 @@ class Recensione {
       voto: (json['voto'] as num? ?? 0).toDouble(),
       trama: json['trama'] as String? ?? 'N/A',
       recensione: json['recensione'] as String? ?? 'N/A',
-      reviewerName: json['reviewerName'] as String?, // AGGIUNTO (può essere null)
+      reviewerName: json['reviewerName'] as String?,
+      // Leggi la stringa e convertila in DateTime.
+      // Fornisci un fallback a DateTime.now() se il campo non esiste o è malformato.
+      dataCreazione: json['dataCreazione'] != null
+          ? DateTime.parse(json['dataCreazione'] as String)
+          : DateTime.now(),
     );
   }
 
-  // (Opzionale ma utile) Override equals e hashCode se usi questi oggetti in Set o come chiavi di Map
+  Recensione copyWith({
+    String? titolo,
+    String? genere,
+    double? voto,
+    String? trama,
+    String? recensione,
+    String? reviewerName,
+    DateTime? dataCreazione, // AGGIUNTO A COPYWITH
+  }) {
+    return Recensione(
+      titolo: titolo ?? this.titolo,
+      genere: genere ?? this.genere,
+      voto: voto ?? this.voto,
+      trama: trama ?? this.trama,
+      recensione: recensione ?? this.recensione,
+      reviewerName: reviewerName ?? this.reviewerName,
+      dataCreazione: dataCreazione ?? this.dataCreazione,
+    );
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -51,29 +76,18 @@ class Recensione {
               titolo == other.titolo &&
               genere == other.genere &&
               voto == other.voto &&
-              // Compara anche reviewerName se vuoi che sia parte dell'identità unica
-              reviewerName == other.reviewerName;
+              trama == other.trama &&
+              recensione == other.recensione &&
+              reviewerName == other.reviewerName &&
+              dataCreazione == other.dataCreazione; // AGGIUNTO A EQUALS
 
   @override
-  int get hashCode => titolo.hashCode ^ genere.hashCode ^ voto.hashCode ^ (reviewerName?.hashCode ?? 0);
-
-  // (Opzionale) Metodo copyWith per creare facilmente una copia modificata
-  Recensione copyWith({
-    String? titolo,
-    String? genere,
-    double? voto,
-    String? trama,
-    String? recensione,
-    String? reviewerName, // Aggiunto qui
-  }) {
-    return Recensione(
-      titolo: titolo ?? this.titolo,
-      genere: genere ?? this.genere,
-      voto: voto ?? this.voto,
-      trama: trama ?? this.trama,
-      recensione: recensione ?? this.recensione,
-      reviewerName: reviewerName ?? this.reviewerName, // Gestisci anche il caso di volerlo settare a null
-    );
-  }
+  int get hashCode =>
+      titolo.hashCode ^
+      genere.hashCode ^
+      voto.hashCode ^
+      trama.hashCode ^
+      recensione.hashCode ^
+      reviewerName.hashCode ^
+      dataCreazione.hashCode; // AGGIUNTO A HASHCODE
 }
-
